@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currency Converter — Front Desk Tool</title>
+  <meta name="description" content="Quick currency conversion tool for hotel front desk staff." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- Status strip: signature element. Reads like a small back-office ledger header. -->
+    <header class="status-strip" role="status" aria-live="polite" id="statusStrip">
+      <span class="status-strip__dot" id="statusDot" aria-hidden="true"></span>
+      <span class="status-strip__text" id="statusText">Checking connection…</span>
+      <span class="status-strip__synced" id="syncedText"></span>
+    </header>
+
+    <main class="card">
+      <h1 class="card__title">Currency Converter</h1>
+      <p class="card__subtitle">For front desk use — rates update automatically.</p>
+
+      <!-- Empty / error state. Hidden unless there is no usable data at all. -->
+      <div class="empty-state" id="emptyState" hidden>
+        <p class="empty-state__message">No data found.</p>
+        <p class="empty-state__hint">We couldn't load exchange rates. Check the connection and try again.</p>
+        <button type="button" class="btn btn--primary" id="retryButton">Retry</button>
+      </div>
+
+      <!-- Stale-data banner. Shown when we fall back to a cached rate after a failed refresh. -->
+      <div class="banner" id="staleBanner" role="status" aria-live="polite" hidden>
+        <span id="staleBannerText"></span>
+        <button type="button" class="banner__retry" id="staleRetryButton">Retry</button>
+      </div>
+
+      <form class="converter" id="converterForm" novalidate>
+
+        <div class="field">
+          <label for="amountInput">Amount</label>
+          <input type="text" inputmode="decimal" id="amountInput" name="amount" value="1" autocomplete="off"
+            aria-describedby="amountError" aria-invalid="false" />
+          <p class="field__error" id="amountError" role="alert"></p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="fromCurrency">From</label>
+            <select id="fromCurrency" name="fromCurrency" aria-describedby="currencyError"></select>
+          </div>
+
+          <button type="button" class="btn btn--swap" id="swapButton" aria-label="Swap from and to currencies"
+            title="Swap currencies">⇅</button>
+
+          <div class="field">
+            <label for="toCurrency">To</label>
+            <select id="toCurrency" name="toCurrency" aria-describedby="currencyError"></select>
+          </div>
+        </div>
+        <p class="field__error" id="currencyError" role="alert"></p>
+
+        <button type="submit" class="btn btn--primary btn--full" id="convertButton">
+          Convert
+        </button>
+
+        <div class="result" id="resultBox" aria-live="polite">
+          <span class="result__placeholder" id="resultPlaceholder">Enter an amount and press Convert.</span>
+        </div>
+
+        <div class="loading" id="loadingIndicator" hidden aria-live="polite">
+          <span class="loading__spinner" aria-hidden="true"></span>
+          <span>Loading current rates…</span>
+        </div>
+
+      </form>
+    </main>
+
+    <footer class="page-footer">
+      <span>Rates refresh automatically. Last successful sync shown above.</span>
+    </footer>
+
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
