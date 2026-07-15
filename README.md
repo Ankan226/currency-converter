@@ -1,7 +1,7 @@
 # Currency Converter — Boutique Hotel Front Desk Tool
 
-**Ticket:** ENG-38867 · **Epic:** Core Infrastructure Overhaul · **Priority:** P1
 **Live demo:** https://ankan226.github.io/currency-converter/
+
 **Repository:** https://github.com/Ankan226/currency-converter
 
 A lightweight, dependency-free currency converter built for hotel front
