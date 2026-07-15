@@ -14,14 +14,14 @@ JavaScript — no frameworks, no build step, no API key required.
 
 ```
 currency-converter/
-├── index.html          # Markup + semantic structure, ARIA wiring
+├── index.html          
 ├── css/
-│   └── styles.css      # Monochromatic design system (CSS variables)
+│   └── styles.css      
 ├── js/
-│   ├── utils.js          # Sanitization, validation, formatting
-│   ├── api.js              # fetch() wrapper: timeout, retry, in-memory cache
-│   └── app.js                # UI wiring, state, conversion logic, telemetry
-├── .eslintrc.json       # Lint config (zero warnings, per DoD)
+│   ├── utils.js          
+│   ├── api.js              
+│   └── app.js                
+├── .eslintrc.json      
 ├── .gitignore
 └── README.md
 ```
@@ -158,24 +158,6 @@ Or use the VS Code "Live Server" extension, or `npx serve .`.
 Opening `index.html` directly via `file://` also works in most cases,
 since the app only needs outbound internet access to reach the rates
 API — no backend of its own.
-
----
-
-## 4. Testing Checklist (maps to the DoD)
-
-| Check | How to verify |
-|---|---|
-| Compiles/runs without fatal errors | Open the live site, check DevTools console for errors |
-| Zero ESLint warnings | `npx eslint js/*.js --no-eslintrc --env browser,es2021` |
-| Happy path | Enter an amount, pick two currencies, press Convert, confirm the result |
-| Empty state | DevTools → Network → block the `open-er-api.com` request → reload → confirm "No data found" |
-| Bad connectivity | DevTools → Network → throttle to "Slow 3G" → reload → confirm the loading spinner shows |
-| Invalid input | Type letters into Amount, press Convert → confirm red highlight + inline message + no result |
-| Convert-only trigger | Type an amount without pressing Convert → confirm the result does **not** change until Convert/Enter |
-| Keyboard navigation | Tab through the whole form with no mouse; confirm every control is reachable with a visible focus ring |
-| Accessibility | DevTools → Lighthouse → Accessibility only → Analyze page load → confirm 100 |
-| Telemetry | Console → click Convert once → confirm exactly one `[Analytics]` log line |
-| Security | `grep -ri "api_key\|secret\|password" .` → should return nothing |
 
 ---
 
